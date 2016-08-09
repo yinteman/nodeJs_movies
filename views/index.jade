@@ -1,0 +1,32 @@
+
+extends  layout
+block content
+  h1=title
+  .container
+    .row
+         .col-md-12
+           form(method='get' action='/index')
+             .input-group.col-sm-4.pull-right
+               input.form-control(type='text' name='search')
+               span.input-group-btn
+                 button.btn.btn-default(type='submit') 搜索
+
+      each cat in list
+
+        .panel.panel-primary
+          .panel-heading
+            a(href='/index/Bycate/#{cat._id}')
+              h3 #{cat.name}
+          .panel-body
+            - console.log(cat.movies)
+            if cat.movies.length >0
+              each item in cat.movies
+
+                .col-md-2
+                  .thumbnail
+                    a(href='/detail/#{item._id._id}')
+                      img(src='#{item._id.poster}' alt="#{item._id.poster}" )
+
+                    .caption
+                      h3 #{item._id.title}
+                    p: a.btn.btn-primary(href='/detail/#{item._id._id}' role='button') 观看预告

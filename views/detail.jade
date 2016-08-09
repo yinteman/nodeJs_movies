@@ -1,0 +1,53 @@
+//
+   Created by ZXR on 2016/7/28.
+extends layout
+block content
+   .container
+       .row
+           .col-md-7
+               embed(src="#{movie.flash}",allowfullScreen='true',quality='high',width='720',height='600',align='middle',type='application/x-shockwave-flash')
+           .col-md-5
+               dl.dl-horizontal
+                 dt 电影名称
+                 dd=movie.title
+                 dt 导演
+                 dd=movie.director
+                 dt 国家
+                 dd=movie.contry
+                 dt 上映时间
+                 dd=movie.year
+                 dt 简介
+                 dd=movie.summary
+
+       .panel-body
+         ul.media-list
+           each item in comments
+              li.media
+                 .pull-left
+                  a.comment(href='#comment', data-tid='#{item.from._id}', data-cid='#{item._id}' style='width:100px;height:100px;display:block')
+                     img.media-object(src='/images/touxiang.jpg' style='width:100px;height:100px')
+                  .media-body
+                     h4.media-heading #{item.from.name}
+                     p #{item.content}
+                      if item.reply && item.reply.length > 0
+                        each reply in item.reply
+                          .media
+                            .pull-left
+                              a.comment(href='#comment', data-tid='#{reply.from._id}', data-cid='#{item._id}')
+                                img.media-object(src='/images/touxiang.jpg' style='width:100px;height:100px')
+                              .media-body
+                                h4.media-heading #{reply.from.name}
+                                p #{reply.content}
+
+
+        #comment
+          form#commentForm(method='post', action='/comment')
+             input(type='hidden' name='movie' value='#{movie._id}')
+             .form-group
+                textarea.form-control(name='content' row=3 type='text')
+                button.btn.btn-default(type='submit') 回复
+       .contianer
+           a.btn.btn-default(href='/index') 返回列表
+
+
+   script(src='/javascripts/detail.js')

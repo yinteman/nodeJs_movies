@@ -1,0 +1,33 @@
+//
+   Created by ZXR on 2016/8/8.
+
+extends  layout
+block content
+    h1=title
+    .container
+        .row
+           .panel.panel-primary
+              .panel-heading
+                 h3 #{list.name}
+               .panel-body
+
+                 if list && list.length >0
+                      each item in list
+                         .col-md-2
+                           .thumbnail
+                                a(href='/detail/#{item._id._id}')
+                                     img(src='/images/#{item._id.poster}' alt="#{item._id.poster}" )
+
+                                 .caption
+                                    h3 #{item._id.title}
+                                    p: a.btn.btn-primary(href='/detail/#{item._id._id}' role='button') 观看预告
+                .panel-footer
+                    ul.pagination
+                        - for(var i =0;i<totalPage;i++){
+                         - if (curPage == (i+1)  ){
+                             li.active
+                                span #{curPage}
+                         - }else{
+                             li
+                               a(href='/index/Bycate/#{catId}?p=#{i +1}') #{i +1 }
+                         -}}

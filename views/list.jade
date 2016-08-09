@@ -1,0 +1,36 @@
+//
+   Created by ZXR on 2016/7/28.
+
+extends layout
+
+block content
+   .container
+      .row
+         table.table.table-hover.table-bordered
+            thead
+               th 电影名称
+               th 导演
+               td 国家
+               th 上映时间
+               th 录入时间
+               th 查看
+               th 更新
+               th 删除
+            tbody
+               each item in movies
+                  tr(class='item-id-#{item._id}')
+                     td #{item.title}
+                     td #{item.director}
+                     td #{item.country}
+                     td #{item.year}
+                     //-后期要修改的
+                     td #{item.updatetime}
+
+                     td: a(target="_blank",href='/detail/#{item._id}')     查看
+                     td: a(target="_blank",href='/admin/#{item._id}')  修改
+                     td
+                       button.btn.btn-danger.del(type='button' data-id="#{item._id}")
+                          删除
+
+
+   script(src='/javascripts/delete.js')

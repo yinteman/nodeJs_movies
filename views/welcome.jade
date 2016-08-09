@@ -1,0 +1,52 @@
+//
+   Created by ZXR on 2016/8/4.用户登录的主页面
+
+extends layout
+block content
+    h1=say
+    .navbar.navbar-inverse.navbar-fixed-bottom
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') welcom
+        p.navbar-text.navbar-right
+           if user
+                span welcom #{user.name}
+                span &nbsp;|&nbsp;
+                a.navbar-link(href='/user/loginOut') 注销
+           else
+               a.navbar-link(href='#' data-target='#signUpModel' data-toggle='modal') 注册
+               span &nbsp;|&nbsp;
+               a.navbar-link(href='#'  data-target='#loginModel' data-toggle='modal') 登陆
+              //-  注册的拟态框
+    #signUpModel.modal.fade
+        .modal-dialog
+            .modal-content
+                form(method='post' action='/user/signUp')
+                    .modal-header 注册
+                    .modal-body
+                        .form-group
+                            label(for='signupName') 用户名
+                            input#signupName.form-control(name='name' type='text')
+                        .form-group
+                            label(for='signUpPwd') 密码
+                            input#signupPwd.form-control(name='pwd' type='password')
+                    .modal-footer
+                        button.btn.btn-default(type='button' data-dismiss='modal') close
+                        button.btn.btn-primary(type='submit') 提交
+
+                  //- 登陆的拟态框
+    #loginModel.modal.fade
+        .modal-dialog
+            .modal-content
+                form(method='post' action='/user/login')
+                    .modal-header 登陆
+                    .modal-body
+                        .form-group
+                            label(for='loginName') 用户名
+                            input#loginName.form-control(name='name' type='text')
+                        .form-group
+                            label(for='loginPwd') 密码
+                            input#loginPwd.form-control(name='pwd' type='password')
+                    .modal-footer
+                        button.btn.btn-default(type='button' data-dismiss='modal') close
+                        button.btn.btn-primary(type='submit') 登陆

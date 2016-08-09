@@ -1,0 +1,14 @@
+//
+   Created by ZXR on 2016/8/5.
+
+extends layout
+block content
+    .container
+        .row
+            form.form-horizontal(method='post' action='/category')
+               .form-group
+                   label.col-sm-2.control-label(for='inputcategory') 电影分类
+                   .col-sm-3
+                       input.form-control#inputcategory(type='text' name='name')
+                .form-group
+                   button.btn.btn-default(type='submit') 录入

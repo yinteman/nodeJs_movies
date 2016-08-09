@@ -1,0 +1,19 @@
+//
+   Created by ZXR on 2016/8/8.
+extends layout
+block content
+    .container
+       .row
+         table.table.table-hover.table-bordered
+             thead
+               th 类别名称
+               th 操作
+             tbody
+                 - console.log(list)
+               each item in list
+               tr
+                 td #{item.name}
+                 td
+                   a.btn.btn-default(href='/category/newCate' role='button') 新增
+                   span &nbsp;|&nbsp;
+                   a.btn.btn-danger(href='/category/catelist/#{item._id}' role='button') 删除

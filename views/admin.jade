@@ -1,0 +1,67 @@
+//
+   Created by ZXR on 2016/7/28.
+
+extends layout
+block content
+    .warp
+        label douban
+            input#douban(type='text' name='douban' style='width:200px')
+    .container
+        .row
+            form.form-horizontal(method='post' action='/admin' )
+                .form-group
+                    label.col-sm-3.contor-label(for='title') 电影名称
+                    .col-sm-9
+                       input#title.form-control(type='text' name='title' value= movie.title)
+                .form-group
+                     label.col-sm-3.contor-label(for='selfdefined') 自定义类型
+                     .col-sm-9
+                         input#selfdefined.form-control(type='text' name='cateName')
+                .form-group
+                  each cate in category
+                      label.radio-inline #{cate.name}
+                      input.radio-inline(type='radio' name='category' value='#{cate._id}' checked= cate._id == movie.category)
+                .form-group
+                    label.col-sm-3.contor-label(for='directror' ) 导演
+                    .col-sm-9
+                        input#directror.form-control(type='text' name='director' value= movie.directror||'')
+                .form-group
+                    label.col-sm-3.contor-label(for='contry') 电影国家
+                    .col-sm-9
+                        input#contry.form-control(type='text' name='country' value=movie.country)
+                .form-group
+                    label.col-sm-3.contor-label(for='year') 上映时间
+                    .col-sm-9
+                        input#year.form-control(type='text' name='year' value=movie.year)
+                .form-group
+                    label.col-sm-3.contor-label(for='poster') 海报
+                    .col-sm-9
+                        input#poster.form-control(type='text' name='poster' value= uplodeImgae ||movie.poster)
+                .form-group
+                     span#imagesShow
+                .form-group
+                    label.col-sm-3.contor-label(for='summary' ) 简介
+                    .col-sm-9
+                        input#summary.form-control(type='text' name='summary' value=movie.summary )
+
+                .form-group
+                    button.col-sm-offset-4.col-sm-3.btn.btn-primary(type='submit' ) 提交
+
+            a.btn.btn-default(href='#' data-toggle='modal'  data-target="#uploaeModal")  上传海报
+
+        //-上传海报的模块
+
+        #uploaeModal.modal.fade
+            .modal-dialog
+                .modal-content
+                    form(method='post' action='/admin/upload' enctype='multipart/form-data')
+                        .modal-header   上传文件
+                        .modal-body
+                            .form-group
+                                input.form-control(type='file' name='upload')
+                                button.btn.btn-default(type='submit') 上传
+
+
+
+
+    script(src='/javascripts/doubanAPI.js')
